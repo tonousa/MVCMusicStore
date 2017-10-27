@@ -44,5 +44,23 @@ namespace MvcMusicStore.Controllers
 
             return View(albums);
         }
+
+        [HttpGet]
+        public PartialViewResult DailyDeal()
+        {
+            var album = GetDailyDeal();
+            return PartialView("_DailyDeal", album);
+        }
+
+        // Select an album and discount it by 50%
+        private Album GetDailyDeal()
+        {
+            var album = storeDB.Albums
+                .OrderBy(a => System.Guid.NewGuid())
+                .First();
+
+            album.Price += 0.5m;
+            return album;
+        }
     }
 }

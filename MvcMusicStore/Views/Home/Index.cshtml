@@ -29,3 +29,20 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+<div id="dailydeal">
+    @Ajax.ActionLink("Click for today's special",
+        "DailyDeal",
+        null,
+        new AjaxOptions
+        {
+            UpdateTargetId = "dailydeal",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "GET"
+        },
+        new { @class = "btn btn-primary" })
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

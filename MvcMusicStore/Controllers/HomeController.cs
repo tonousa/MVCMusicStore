@@ -62,5 +62,25 @@ namespace MvcMusicStore.Controllers
             album.Price += 0.5m;
             return album;
         }
+
+        public PartialViewResult ArtistSearch(string q)
+        {
+            var artists = GetArtists(q);
+            return PartialView(artists);
+        }
+
+        private List<Artist> GetArtists(string searchString)
+        {
+            return storeDB.Artists
+                .Where(a => a.Name.Contains(searchString))
+                .ToList();
+        }
+
+        public ActionResult QuickSearch(string term)
+        {
+            var artists = GetArtists(term).Select(a => new {value = a.Name});
+            return Json(artists, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

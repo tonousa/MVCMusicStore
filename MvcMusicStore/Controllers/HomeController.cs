@@ -7,6 +7,7 @@ using MvcMusicStore.Models;
 
 namespace MvcMusicStore.Controllers
 {
+    //[Route("home/{action}")]
     public class HomeController : Controller
     {
         private MusicStoreDB storeDB = new MusicStoreDB();
@@ -63,10 +64,10 @@ namespace MvcMusicStore.Controllers
             return album;
         }
 
-        public PartialViewResult ArtistSearch(string q)
+        public ActionResult ArtistSearch(string q)
         {
             var artists = GetArtists(q);
-            return PartialView(artists);
+            return Json(artists, JsonRequestBehavior.AllowGet);
         }
 
         private List<Artist> GetArtists(string searchString)

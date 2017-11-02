@@ -30,6 +30,34 @@
     </div>
 </div>
 
+<button class="btn btn-primary btn-lg" data-toggle="modal" 
+        data-target="#myModal">
+    Click for modal dialog fun
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dissmiss="modal" 
+                    aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">
+                This is the modal dialog!
+            </h4>
+        </div>
+        <div class="modal-body">
+            quite exciting, isn't it?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+                    data-dissmiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">
+                Acknowledge how exciting this is
+            </button>
+        </div>
+    </div>
+</div>
+
 <div id="dailydeal">
     @Ajax.ActionLink("Click for today's special",
         "DailyDeal",
@@ -46,7 +74,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Artist Search</div>
     <div class="panel-body">
-        @using (Ajax.BeginForm("ArtistSearch", "Home",
+        @*@using (Ajax.BeginForm("ArtistSearch", "Home",
             new AjaxOptions
             {
                 InsertionMode = InsertionMode.Replace,
@@ -64,6 +92,24 @@
                 src="@Url.Content("~/Images/ajax-loader.gif")" 
                 style="display:none" />
         }
+        <div id="searchResults"></div>*@
+
+        <form id="artistSeach" method="get" action="@Url.Action("ArtistSearch", "Home")">
+            <input type="text" name="q" 
+                   data-autocomplete-source="@Url.Action("QuickSearch", "Home")" />
+            <input type="submit" value="search" />
+            <img id="ajax-loader" src="~/Content/Images/ajax-loader.gif" 
+                 style="display:none" />
+        </form>
+
+        <script id="artistTemplate" type="text/html">
+            <ul>
+                {{#artists}}
+                <li>{{Name}}</li>
+                {{/artists}}
+            </ul>
+        </script>
+
         <div id="searchResults"></div>
     </div>
 </div>

@@ -10,6 +10,8 @@ using MvcMusicStore.Models;
 
 namespace MvcMusicStore.Controllers
 {
+    //[RoutePrefix("album")]
+    //[Route("{action=Index}/{id?}")]
     public class StoreManagerController : Controller
     {
         private MusicStoreDB db = new MusicStoreDB();
@@ -22,6 +24,7 @@ namespace MvcMusicStore.Controllers
         }
 
         // GET: StoreManager/Details/5
+        //[Route("Album/Details/{id}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
